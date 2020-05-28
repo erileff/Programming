@@ -9,12 +9,14 @@ function buildGraph(edges) {
 
     /* addEdge adds a list of places to graph and shows every other place that can be reached from that place */
     function addEdge(from, to) { 
+        /* If it's not a 'from' place, it's set as a 'to' array. If it is a 'from' place, it's added to the relevant 'to' array. */
         if (graph[from] == null) {
             graph[from] = [to];
         } else {
             graph[from].push(to);
         }
     }
+    /* This splits the roads array's items and then adds edges between the places. */
     for (let [from, to] of edges.map(r => r.split("-"))) {
         addEdge(from, to);
         addEdge(to, from);
@@ -24,4 +26,22 @@ function buildGraph(edges) {
 
 const roadGraph = buildGraph(roads);
 
-console.log(roadGraph);
+class VillageState {
+    
+    constructor(place, parcels) {
+        this.place = place;
+        this.parcels = parcels;
+    }
+    
+    move(destination) {
+        if (!roadGraph[this.place].includes(destination)) {
+            return this;
+        } else {
+            let parcels = this.parcels.map(p => {
+                if (p.place != this.place) return p;
+                return {place: destination, address: p.address};
+            }).filter(p => p.place != p.address);
+            return new VillageState(destination, parcels);
+        }
+    }
+}
