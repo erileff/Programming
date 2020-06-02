@@ -1,19 +1,20 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
-const bodyParser = require('body-parser');
 
 module.exports = app;
 
 /* Do not change the following line! It is required for testing and allowing
 *  the frontend application to interact as planned with the api server
 */
+
 const PORT = process.env.PORT || 4001;
 
 // Add middleware for handling CORS requests from index.html
+const cors = require('cors');
 app.use(cors());
 
 // Add middleware for parsing request bodies here:
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 // Mount your existing apiRouter below at the '/api' path.
