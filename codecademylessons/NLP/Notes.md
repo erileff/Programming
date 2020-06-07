@@ -146,3 +146,126 @@ result = re.sub(r'\s{4}', '', text)
 print(result)
 # This is a paragraph
 ```
+
+## Tokenization
+To access each word in a string, we have to break the text into smaller components. This is called tokenization and individual components are called tokens. Tokenization can be used to find how many words or sentences are in text, how many times a word or phrase exist, or accounting for which terms are likely to co-occur.
+
+`ntlk`'s `word_tokenize()` function accepts a string and returns a list of words. `sent_tokenize()` returns a list of sentences.
+
+## Normalization
+Normalization is a catch-all term for various pre-processing tasks besides noise removal and tokenization. It includes tasks like upper or lowercasing, stopword removal, stemming (removing prefixes and suffixes), and lemmatization (replacing a word with its root).
+
+## Stopword Removal
+Stopwords are words removed during preprocessing, usually the most common words in a language that don't provide any information about the tone of a statement, i.e. "a", "an," and "the." NLTK has a built-in library of these words which can be imported by using:
+```py
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
+```
+
+## Stemming
+Stemming removes word affixes, i.e. "going" becomes "go." NLTK has a built-in stemmer called PorterStemmer. To import it:
+```py
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
+```
+
+## Lemmatization
+Importing NLTK's WordNetLemmatizer:
+```py
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+```
+
+`lemmatize()` treats every word as a noun, so we need to tag each word in text with the most likely part of speech.
+
+### Part-of-Speech Tagging
+Import wordnet and Counter:
+```py
+from nltk.corpus import wordnet
+from collections import Counter
+```
+Get synonyms:
+```py
+def get_part_of_speech(word):
+    probable_part_of_speech = wordnet.synsets(word)
+```
+Use Counter to count number of synonyms that fall into each part of speech:
+```py
+pos_counts["n"] = len( [
+    item for item in probable_part_of_speech if item.pos()=="n" ] )
+```
+Return most common part of speech:
+```py
+most_likely_part_of_speech = pos_counts.most_common(1)[0][0]
+```
+Pass into lemmatizer to find root for each word:
+```py
+tokenized = ["How", "old", "is", "the", "country", "Indonesia"]
+
+lemmatized = [lemmatizer.lemmatize(token, get_part_of_speech(token)) for token in tokenized]
+
+print(lemmatized)
+# ['How', 'old', 'be', 'the', 'country', 'Indonesia']
+# Previously: ['How', 'old', 'is', 'the', 'country', 'Indonesia']
+```
+
+# NLP with Regular Expressions
+
+## Compiling and Matching
+`.compile()` takes a regex pattern as an argument and compiles the pattern into a regex object, which you can later use to find matching text. This will match exactly 4 upper or lowercase characters:
+```py
+regular_expression_object = re.compile("[A-Za-z]{4}")
+```
+`.match()` takes a string of text as an argument and looks for a single match to the regex that starts at the beginning of the string. If it finds a match that starts at the beginning of the sting, it will return a match object, which lets you know what piece of text matched and at what index the match begins and ends. If there's no match, it returns `None`. With the match object stored in a variable, you can access the matched text by calling `result.group[0]` (where `result` is the variable). This can be simplified to one line:
+```py
+result = re.match("[A-Za-z]{4}, "Toto")
+```
+A regular expression is the first argument and a string is the second argument.
+
+## Searching and Finding
+`.search()` method looks left to right through an entire piece of text and returns a match object for the first match to the regex given. If no match, returns `None`. `.findall()` finds all occurrences of a word or keyword in a piece of text. It takes a regex as first argument and string as second argument. It returns a list of all *non-overlapping* matches of the regex.
+
+## Part-of-Speech Tagging
+`nltk`'s `pos_tag()` function automates the POS tagging process. The function takes one argument, a list of words in the order they appear in a sentence, and returns a list of tuples, where the first entry is a word and second is the part-of-speech tag. (A tuple is a sequence of Python objects.)
+```py
+part_of_speech_tagged_sentence = pos_tag(word_sentence)
+```
+| Tag  | Description                              | Example                                 |
+|------|------------------------------------------|-----------------------------------------|
+| CC   | coordinating conjunction                 | and                                     |
+| CD   | cardinal number                          | 1, three                                |
+| DT   | determiner                               | the                                     |
+| EX   | existential *there*                      | *there* is                              |
+| FW   | foreign word                             | d'hoevre                                |
+| IN   | preposition or subordinating conjunction | in, of, like, after, that               |
+| JJ   | adjective                                | green                                   |
+| JJR  | adjective, comparative                   | greener                                 |
+| JJS  | adjective, superlative                   | greenest                                |
+| LS   | list item marker                         | 1)                                      |
+| MD   | modal                                    | could, will                             |
+| NN   | noun, singular or mass                   | table                                   |
+| NNS  | noun, plural                             | tables                                  |
+| NNP  | proper noun, singular                    | John                                    |
+| NNPS | proper noun, plural                      | Vikings                                 |
+| PDT  | predeterminer                            | *both* the boys                         |
+| POS  | possessive ending                        | friend'*s*                              |
+| PRP  | personal pronoun                         | I, he, it                               |
+| PRP$ | possessive pronoun                       | my, his                                 |
+| RB   | adverb                                   | however, usually, naturally, here, good |
+| RBR  | adverb, comparative                      | better                                  |
+| RBS  | adverb, superlative                      | best                                    |
+| RP   | particle                                 | give *up*                               |
+| SYM  | symbol                                   | $, %                                    |
+| TO   | *to*                                     | *to* go, *to* him                       |
+| UH   | interjection                             | uhhuh                                   |
+| VB   | verb, base form                          | take                                    |
+| VBD  | verb, past tense                         | took                                    |
+| VBG  | verb, gerund or present participle       | taking                                  |
+| VBN  | verb, past participle                    | taken                                   |
+| VBP  | verb, non-3rd person singular present    | take                                    |
+| VBZ  | verb, 3rd person singular present        | takes                                   |
+| WDT  | wh-determiner                            | which                                   |
+| WP   | wh-pronoun                               | who, what                               |
+| WP$  | possessive wh-pronoun                    | whose                                   |
+| WRB  | wh-adverb                                | where, when                             |
+
