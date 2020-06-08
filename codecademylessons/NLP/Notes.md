@@ -269,3 +269,45 @@ part_of_speech_tagged_sentence = pos_tag(word_sentence)
 | WP$  | possessive wh-pronoun                    | whose                                   |
 | WRB  | wh-adverb                                | where, when                             |
 
+## Introduction to Chunking
+Using POS tagged text, you can use regex to find patterns in sentence structure that give insight into the meaning of a text. Grouping words by their POS tag is called *chunking*.
+
+With `nltk`, you can define a pattern of POS tags using a modified notation of regex. You can then find non-overlapping matches, or chunks of words, in the POS tagged sentences of a text.
+
+The regex used to find chunks is called *chunk grammar*.
+```py
+chunk_grammar = "AN: {<JJ><NN>}"
+```
+`AN` is a user-defined name for the kind of chunk you're searching for. Here, it stands for adjective-noun. Curly braces surround the chunk grammar. `JJ` matches any adjective. `NN` matches any noun, singular or plural.
+
+To use the chunk grammar, create a `nltk` `RegexpParser` object and give it the chunk grammar as an argument.
+```py
+chunk_parser = RegexpParser(chunk_grammar)
+```
+RegexpParser's `.parse()` method takes a list of POS tagged words as an argument and identifies where such chunks occur in the sentence.
+```py
+chunked = chunk_parser.parse(pos_tagged_sentence)
+```
+
+## Chunking Noun Phrases
+A noun phrase contains a noun and operates, as a unit, as a noun. A popular form of noun phrase is determiner-adjective(s)-noun. With regex, you can find all non-overlapping noun phrases in a piece of text. You can use quantifiers like in normal regex to indicate how many parts of speech you want to match.
+```py
+chunk_grammar = "NP: {<DT>?<JJ>*<NN>}"
+```
+This finds an optional determiner, 0 or more adjectives, and a noun.
+
+By finding all the noun phrases in a text, you can perform a frequency analysis and identify important, recurring noun phrases.
+
+## Chunking Verb Phrases
+A verb phrase contains a verb and its complements, objects or modifiers. Structures include:
+* verb of any tense, noun phrase, optional adverb (said the cowardly lion)
+  * `chunk_grammar = "VP: {<VB.*><DT>?<JJ>*<NN><RB.?>?}"`
+* noun phrase, verb of any tense, optional adverb (the cowardly lion said)
+  * `chunk_grammar = "VP: {<DT>?<JJ>*<NN><VB.*><RB.?>?}"`
+
+## Chunk Filtering
+Chunk filtering lets you define what parts of speech you don't want in a chunk and remove them. A popular method for chunk filtering is to chunk an entire sentence together, then indicate which parts of speech are to be filtered out. If the filtered parts are in the middle of a chunk, it will split the chunk into two separate chunks.
+```py
+chunk_grammar = """NP: {<.*>+}
+}<VB.?|IN>+{"""
+```
