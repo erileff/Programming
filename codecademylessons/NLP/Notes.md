@@ -311,3 +311,64 @@ Chunk filtering lets you define what parts of speech you don't want in a chunk a
 chunk_grammar = """NP: {<.*>+}
 }<VB.?|IN>+{"""
 ```
+
+# Intro to Bag-of-Words
+This model's use cases include determining topics in a song, filtering spam, finding out a tweet's sentiment, and creating word clouds.
+
+A statistical language model is a way for computers to make sense of language based on probability.
+
+## BoW Dictionaries
+One of the most common ways to implemenet BoW is as a dictionary with each key set to a word and each value set to the number of times the word appears.
+
+## BoW Vectors
+A feature vector is a numeric representation of an item's important features. Each has its own column saying whether the feature exists for that item. Adding in the number of times a word occurs turns it into *feature extraction* or *vectorization*. When building BoW vectors, we generally create a *features dictionary* of all vocabulary in our training data mapped to indices.
+
+## Building a Features Dictionary
+```py
+from preprocessing import preprocess_text
+
+def create_features_dictionary(documents):
+  features_dictionary = {}
+  merged = " ".join(documents)
+  tokens = preprocess_text(merged)
+  index = 0
+  for token in tokens:
+    if not(token) in features_dictionary:
+      features_dictionary[token] = index
+      index += 1
+  return features_dictionary, tokens
+```
+
+# Term Frequency-Inverse Document Frequency
+*tf-idf's* use cases include ranking search results, text summarization, and building smarter chatbots.
+
+## Converting BoW to Tf-idf
+```py
+tf_idf_scores = tfidf_transformer.fit_transform(count_matrix)
+```
+
+# Word Embeddings
+
+## Vectors
+Vectors are containers of information that help us summarize information about an object using numbers. Then, using number representation, we can make comparisons between the vector representations of different objects.
+
+## Word Embedding
+Word embeddings are vector representations of a word.
+
+Loading a basic English word embedding model using spaCy:
+```py
+nlp = spacy.load('en')
+nlp('love').vector
+```
+
+## Distance
+Distance in vectors can be measured in different ways.
+
+### Manhattan distance (city block distance)
+Distance is the sum of the differences across each individual dimension of the vectors.
+
+### Euclidean distance (straight line distance)
+Distance is the square root of the sum of the squares of the differences in each dimension.
+
+### Cosine distance
+Distance is concerned with angles between two vectors. Two vectors pointing in same direction have no angle and have a distance of 0. Opposite directions have a distance of 1.
