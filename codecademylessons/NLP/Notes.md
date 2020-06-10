@@ -372,3 +372,13 @@ Distance is the square root of the sum of the squares of the differences in each
 
 ### Cosine distance
 Distance is concerned with angles between two vectors. Two vectors pointing in same direction have no angle and have a distance of 0. Opposite directions have a distance of 1.
+
+# Long Short Term Memory Networks
+Neural networks are a machine learning framework loosely based on the structure of the human brain.
+
+## Introduction to seq2seq
+seq2seq is a common neural model used for machine translation, text summary generation, chatbots, etc. seq2seq networks have two parts, an *encoder* that accepts language, audio, or video input and a *decoder* that takes the encoder's final state (or memory) as its initial state. "Teacher forcing" is used to train the decoder to predict the following text in a target sentence given previous text.
+
+## Training Setup
+In a *one-hot vector*, every token in our set is represented by a 0 except for the current token which is represented by a 1. For `["the", "dog", "licked", "me"]`, a one-hot vector for "dog" is `[0, 1, 0, 0]`.
+
