@@ -31,5 +31,21 @@ print(8 ** 2)
 # prints 8 squared (64)
 ```
 
-## Concatenation
-To concatenate a string with 
+## Multi-Line Strings
+Using `"""` or `'''` instead of just one tells the program that the string doesn't end until the next triple-quote.
+
+## User Input
+`input()` requires a prompt message, which it will print for the user before they enter the new information.
+```py
+likes_snakes = input("Do you like snakes?")
+```
+This prints the string, then the user's answer is saved to the variable.
+
+# Functions
+
+## Write a Function
+Functions must have a heading and an indented block of code. The heading starts with the keyword `def` and the name of the function, followed by parentheses and a colon.
+```py
+def function_name():
+some code
+```
