@@ -49,3 +49,80 @@ Functions must have a heading and an indented block of code. The heading starts 
 def function_name():
 some code
 ```
+
+## Scope
+A variable defined inside a function doesn't exist outside the function.
+
+# Control Flow
+
+## Operators
+| ==  | Equal                                                   |
+|-----|---------------------------------------------------------|
+| !=  | Not Equal                                               |
+| >   | Greater than                                            |
+| <   | Less than                                               |
+| >=  | Greater than or equal to                                |
+| <=  | Less than or equal to                                   |
+| and | returns True if both statements true                    |
+| or  | returns True if one statement is true                   |
+| not | Reverse the result, returns false if the result is true |
+
+## Try and Except Statements
+`try` and `except` can be used to check for possible errors a user might encounter.
+```py
+try: 
+    #statement
+except ErrorName:
+    #statement
+```
+
+The statement under try is executed. If an exception is raised during this, and the exception matches the keyword in the `except` statement, `try` statement terminates and `except` statement executes.
+
+# Lists
+
+## Zip
+To create a list of lists, we can use the command `zip`, which takes two or more lists as inputs and returns an object containing a list of pairs. Each pair contains one element from each input.
+```py
+names = ['Jenny', 'Alexus', 'Sam', 'Grace']
+heights = [61, 70, 67, 65]
+
+names_and_heights = zip(names, heights)
+```
+Printing `names_and_heights` won't return anything useful. It must be converted to a `list` first.
+```py
+print(list(names_and_heights))
+
+# [('Jenny', 61), ('Alexus', 70), ('Sam', 67), ('Grace', 65)]
+```
+
+## Append
+Add a single item:
+```py
+my_list = [1, 2, 3]
+my_list.append(4)
+print(my_list)
+# [1, 2, 3, 4]
+```
+
+## Plus (+)
+Add multiple items:
+```py
+items_sold = ['cake', 'cookie']
+items_sold_new = items_sold + ['bread', 'tart']
+print(items_sold_new)
+# ['cake', 'cookie', 'bread', 'tart']
+```
+
+## Length
+Finding length of a list:
+```py
+len(my_list)
+```
+
+## Last Item
+To find the last item in a list without knowing the length of the list:
+```py
+print(my_list[-1])
+```
+
+## 
