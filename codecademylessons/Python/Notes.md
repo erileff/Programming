@@ -125,4 +125,25 @@ To find the last item in a list without knowing the length of the list:
 print(my_list[-1])
 ```
 
-## 
+## Slicing Lists
+To slice a list:
+```py
+sublist = letters[1:6]
+print(sublist)
+```
+This will slice starting with index 1 and ending at index 5; the end index is not included.
+
+If we're starting at 0 or ending at the index of a list, can write `:3` or `2:`. To select the last 3 elements: `-3:`.
+
+## Count
+To count items in a list:
+```py
+num_i = letters.count('i')
+```
+
+# Loops
+```py
+dog_breeds = ['french_bulldog', 'dalmation', 'shihtzu', 'poodle', 'collie']
+for breed in dog_breeds:
+    print(breed)
+```
