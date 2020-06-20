@@ -147,3 +147,23 @@ dog_breeds = ['french_bulldog', 'dalmation', 'shihtzu', 'poodle', 'collie']
 for breed in dog_breeds:
     print(breed)
 ```
+
+# Modules
+A module is a collection of Python declarations intended broadly to be used as a tool. Modules can also be called "libraries" or "packages."
+
+Syntax for using module:
+```py
+from module_name import object_name
+```
+
+A common library is `datetime`:
+```py
+from datetime import datetime
+```
+`datetime.now()`: current local date and time.
+
+`random.choice()`: takes a list as an argument and returns a number from the list.
+`random.randint()`: takes two numbers as arguments and returns a random number between the two numbers
+
+## Datetime
+`datetime.now`: "2020, 6, 19, 18, 49, 38, 363546."
