@@ -122,15 +122,15 @@ mortality_scale = {
 def mortality_rating(hurricanes):
     ratings = {}
     for name in hurricanes:
-        if name[deaths] == 0:
+        if hurricanes[name]['Deaths'] == 0:
             ratings.update({name: 0})
-        elif name[deaths] <= 100:
+        elif hurricanes[name]['Deaths'] <= 100:
             ratings.update({name: 1})
-        elif name[deaths] <= 500:
+        elif hurricanes[name]['Deaths'] <= 500:
             ratings.update({name: 2})
-        elif name[deaths] <= 1000:
+        elif hurricanes[name]['Deaths'] <= 1000:
             ratings.update({name: 3})
-        elif name[deaths] <= 10000:
+        elif hurricanes[name]['Deaths'] <= 10000:
             ratings.update({name: 4})
     return ratings
 
@@ -143,10 +143,24 @@ print(mortality_rating(hurricanes))
 
 # write your greatest damage function here:
 
+def most_damage(hurricanes):
+    damages = []
+    for name in hurricanes:
+        if hurricanes[name]["Damage"] != "Damages not recorded":
+            damages.append(hurricanes[name]['Damage'])
+    most_damage_cane = max(damages)
+    for name in hurricanes:
+        if hurricanes[name]['Damage'] == most_damage_cane:
+            return name, most_damage_cane
 
-
-
-
-
+print(most_damage(hurricanes))
+# It's Katrina, no surprise there.
 
 # write your catgeorize by damage function here:
+
+damage_scale = {0: 0,
+1: 100000000,
+2: 1000000000,
+3: 10000000000,
+4: 50000000000}
+
