@@ -167,3 +167,8 @@ from datetime import datetime
 
 ## Datetime
 `datetime.now`: "2020, 6, 19, 18, 49, 38, 363546."
+
+# Classes
+
+## Exception
+An Exception is a class that inherits from Python's `Exception` class. It can be validated using the function `issubclass()`. It takes 2 parameters, returning true if the first argument is a subclass of the second argument. If either argument is not a class, `TypeError` is raised.

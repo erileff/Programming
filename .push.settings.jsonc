@@ -1,0 +1,29 @@
+// Push settings file - first generated on Mon Jun 22 2020 16:21:16 GMT-0400 (Eastern Daylight Time).
+// Note: Optional items are commented out and can be uncommented if you wish to set them.
+// Preset environments are: prod, dev, stage. Custom environments (and their colours) can be created in settings.
+{
+	"env": "default",
+	"default": {
+		"service": "SFTP",
+		"options": {
+			// "timeZoneOffset": 0,
+			// "testCollisionTimeDiffs": true,
+			// "collisionUploadAction": null,
+			// "collisionDownloadAction": null,
+			// "followSymlinks": false,
+			// "reminder": true,
+			// "reminderTimeout": null,
+			"host": "ftp://ericataylor.space",
+			"port": 21,
+			"username": "u965061543",
+			"password": "NFmO~Y*A",
+			// "privat eKey": "",
+			// "keyPassphrase": "",
+			"root": "/"
+			// "keepaliveInterval": 3000,
+			// "debug": false,
+			// "fileMode": "",
+			// "sshGateway": null
+		}
+	}
+}
