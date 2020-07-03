@@ -172,3 +172,97 @@ from datetime import datetime
 
 ## Exception
 An Exception is a class that inherits from Python's `Exception` class. It can be validated using the function `issubclass()`. It takes 2 parameters, returning true if the first argument is a subclass of the second argument. If either argument is not a class, `TypeError` is raised.
+
+# Nodes
+An individual node contains data and links to other nodes. Nodes form the basis for linked lists, stacks, queues, trees, etc.
+
+Links within a node are sometimes called "pointers" because they point to another node.
+
+## Linked Lists
+In a linked list, nodes are linked to from only one other node. Adding a new node at the beginning requires you to link your new node to your current head node. To remove a node from the middle, you need to adjust the link on the previous node so it points to the following node.
+
+# Hash Maps
+> Hash map: A key-value store that uses an array and a hashing function to save and retrieve values.
+Key: The identifier given to a value for later retrieval.
+Hash function: A function that takes some input and returns a number.
+Compression function: A function that transforms its inputs into some smaller range of possible outputs.
+
+> Recipe for saving to a hash table:
+> - Take the key and plug it into the hash function, getting the hash code.
+> - Modulo that hash code by the length of the underlying array, getting an array index.
+> - Check if the array at that index is empty, if so, save the value (and the key) there.
+> - If the array is full at that index continue to the next possible position depending on your collision strategy.
+
+> Recipe for retrieving from a hash table:
+> - Take the key and plug it into the hash function, getting the hash code.
+> - Modulo that hash code by the length of the underlying array, getting an array index.
+> - Check if the array at that index has contents, if so, check the key saved there.
+> - If the key matches the one you're looking for, return the value.
+> - If the keys don't match, continue to the next position depending on your collision strategy.
+
+# Heaps
+
+## Min-Heaps
+
+Min-heaps keep track of the minimum value in a dataset, while max-heaps keep track of the maximum value in a dataset.
+
+Heaps enable solutions for problems like finding the shortest path (Dijkstra's Algorithm) or sorting a dataset (heapsort).
+
+**Example:** creates a min-heap one element at a time by adding random numbers, then removes the minimum until the min-heap is empty.
+
+```py
+Adding: 18 to [None]
+HEAP RESTORED! [None, 18]
+
+Adding: 74 to [None, 18]
+HEAP RESTORED! [None, 18, 74]
+
+Adding: 71 to [None, 18, 74]
+HEAP RESTORED! [None, 18, 74, 71]
+
+Adding: 5 to [None, 18, 74, 71]
+swapping 74 with 5
+swapping 18 with 5
+HEAP RESTORED! [None, 5, 18, 71, 74]
+
+Adding: 49 to [None, 5, 18, 71, 74]
+HEAP RESTORED! [None, 5, 18, 71, 74, 49]
+
+Adding: 47 to [None, 5, 18, 71, 74, 49]
+swapping 71 with 47
+HEAP RESTORED! [None, 5, 18, 47, 74, 49, 71]
+
+Removing: 5 from [None, 5, 18, 47, 74, 49, 71]
+Last element moved to first: [None, 71, 18, 47, 74, 49]
+Left child is smaller
+swapping 71 with 18
+Right child is smaller
+swapping 71 with 49
+HEAP RESTORED! [None, 18, 49, 47, 74, 71]
+
+Removing: 18 from [None, 18, 49, 47, 74, 71]
+Last element moved to first: [None, 71, 49, 47, 74]
+Right child is smaller
+swapping 71 with 47
+HEAP RESTORED! [None, 47, 49, 71, 74]
+
+Removing: 47 from [None, 47, 49, 71, 74]
+Last element moved to first: [None, 74, 49, 71]
+Left child is smaller
+swapping 74 with 49
+HEAP RESTORED! [None, 49, 74, 71]
+
+Removing: 49 from [None, 49, 74, 71]
+Last element moved to first: [None, 71, 74]
+There is only a left child
+HEAP RESTORED! [None, 71, 74]
+
+Removing: 71 from [None, 71, 74]
+Last element moved to first: [None, 74]
+HEAP RESTORED! [None, 74]
+
+Removing: 74 from [None, 74]
+Last element moved to first: [None]
+HEAP RESTORED! [None]
+```
+
