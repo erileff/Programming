@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../../JavaScript30"
 		}
 	],
 	"settings": {

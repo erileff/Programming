@@ -266,3 +266,52 @@ Last element moved to first: [None]
 HEAP RESTORED! [None]
 ```
 
+# Function Arguments
+
+## Default Arguments
+
+Function arguments are required, so a function that defines two parameters requires two arguments passed to it. If we give a default argument to a function that argument won't be required.
+
+```python
+def create_user(username, is_admin=False):
+  create_email(username)
+  set_permissions(is_admin)
+  
+user2 = create_user('djohansen')
+```
+
+The required parameters need to come before any parameters with a default argument.
+
+## Keyword Arguments
+
+We use keyword arguments by passing arguments to a function with a special syntax that uses the names of parameters. This is useful if the function has many optional default arguments or if the order of a function's parameters is hard to tell.
+
+```python
+def log_message(logging_style="shout", message="", font="Times", date=None):
+  if logging_style == 'shout':
+    message = message.upper()
+  print(message, date)
+
+log_message(message="Hello from the past", date="November 20, 1693")
+```
+
+Lists can't be default arguments.
+
+```python
+# So if we can’t use a list as a default argument for a function, what can we use? If we want an empty list, we can use None as a special value to indicate we did not receive anything. After we check whether an argument was provided we can instantiate a new list if it wasn’t.
+
+def add_author(authors_books, current_books=None):
+  if current_books is None:
+    current_books = []
+
+  current_books.extend(authors_books)
+  return current_books
+```
+
+Parameter Order:
+
+- All named positional parameters
+- An unpacked positional parameter (`*args`)
+- All named keyword parameters
+- An unpacked keyword parameter (`**kwargs`)
+
