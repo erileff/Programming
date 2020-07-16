@@ -1,0 +1,64 @@
+.top {
+    background-color: hsl(255, 255, 255);
+    font-family: Raleway, sans-serif;
+    font-size: 32px;
+    height: 64px;
+    color: #404040;
+}
+
+.topleft {
+    color: #c5c5c5;
+}
+
+.topright {
+    text-align: right;
+    font-size: 24px;
+}
+
+.topright a {
+    color: #404040;
+    text-decoration: none;
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.bolder {
+    color: #404040;
+    font-weight: bold;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+.hero {
+    background-color: #c5c5c5;
+    display: flex;
+    flex-direction: row;
+}
+
+.hero img {
+    width: 60%;
+    padding: 24px 32px;
+    float: left;
+}
+
+button {
+    color: #c5c5c5;
+    background-color: #404040;
+    border: none;
+    width: 100%;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+h1, h2, h3 {
+    font-family: Raleway, sans-serif;
+    color: #404040;
+}
+
+h1 {
+    font-size: 50px;
+}
